@@ -9,18 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('candidates', function (Blueprint $table) {
-            $table->id();
-             $table->string('position_id')->unique();
-             $table->string('name');
-            
-             $table->string('party_list')->nullable();
-             $table->string('image')->nullable();
-            $table->timestamps();
-        });
-    }
+ public function up(): void
+{
+    Schema::create('candidates', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('party_list')->nullable();
+        $table->foreignId('position_id')->constrained()->cascadeOnDelete();
+        $table->string('image')->nullable();
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
